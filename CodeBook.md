@@ -1,10 +1,11 @@
 <h6>
 
 The codebook below is in the following format :<br>
+</h6>
 ```
 4 timeBodyAccelerationMeanY [-1 to +1] Time of  Body Acceleration Mean along the Y-axis<br>
 ```
-
+<h6>
 
 The first number (4) is the column number of the variable
 
