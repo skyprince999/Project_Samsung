@@ -17,16 +17,16 @@ The fourth column is the description of the variable
 </h6>
 
 >>> <h6>Only the mean and the standard deviation variables have been selected for the tidy data. The following transformation were done on the variable names.</h6>
->>> <h6>**t --> *time</h6>
->>> <h6>**f --> *frequency</h6>
->>> <h6>**Freq --> *Frequency</h6>
->>> <h6>**Acc --> *Acceleration</h6>
->>> <h6>**Gyro --> *Gyroscope</h6>
->>> <h6>**Mag --> *Magnitude</h6>
->>> <h6>**mean --> *Mean</h6>
->>> <h6>**std --> *StdDeviation</h6>
->>> <h6>**gravity --> *Gravity</h6>
->>> <h6>**BodyBody --> *Body</h6>
+>>> *<h6>t --> *time</h6>
+>>> *<h6>f --> *frequency</h6>
+>>> <h6>Freq --> *Frequency</h6>
+>>> <h6>Acc --> *Acceleration</h6>
+>>> <h6>Gyro --> *Gyroscope</h6>
+>>> <h6>Mag --> *Magnitude</h6>
+>>> <h6>mean --> *Mean</h6>
+>>> <h6>std --> *StdDeviation</h6>
+>>> <h6>gravity --> *Gravity</h6>
+>>> <h6>BodyBody --> *Body</h6>
 
 
 <h5>Column Number---Column Names---[Values]---Description</h5>
