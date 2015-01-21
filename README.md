@@ -1,46 +1,113 @@
-(1) Merges the training and the test sets to create one data set. 
+(A lot of my assumptions and choices for the project has been based on the discussion in David's FAQ thread and the "Tidy Data" paper by Hadley Wickhlam.)
 
-There are three files in the Training & Test folders:
-1- Subject_train.txt:: Dim(this identifies the subject whose activity was measured
-2- y_train.txt:: this identifies the activity of the subject
-3- x_train.txt:: this is the actual 561 measurement data
+I assume that the data files are stored as follows ::
 
-The subject_train along with the y_train gives us the activity and identifies the subject. 
-So first the run_analysis.r program merges the three data sets 
+./UCI HAR Dataset
+        ---activity_labels.txt :: activity list with their codes
+        ---features.txt :: feature list of 561 variables
+        ---features_info.txt
+        ---README.txt
+./UCI HAR Dataset/train
+        ---subject_train.txt :: identifies the subject
+        ---X_train.txt :: actual 561 vector measurement
+        ---y_train.txt :: identifies the activity
+./UCI HAR Dataset/test
+        ---subject_test.txt
+        ---X_test.txt
+        ---y_test.txt
+        
+The files in the repo are as follows: 
+1) run_analysis.R : Code for processing and preparing the tidy data
+2) CodeBook.md : Provides description of the data fields in the tidy data
+3) tidy_data.txt : Final output! 
+4) Readme.md : This file! 
 
-subject_train + y_train + x_train ----(merged)--->>> merged_train.txt
+I have not processed the data inside the "Inertial Signals" folder since the information regarding the column names is not provided. 
 
-The same process is performed on the test data
-subject_test + y_test + x_test ----(merged)--->>> merged_test.txt
+======================================================================
+PART 1 - Merges the training and the test sets to create one data set
+======================================================================
 
-The two merged data sets are then merged into a single data set
-merged_test + merged_train ---(merged)--->>> merged_data.txt
+The data is read from the train and test folders and merged together. The files are read using read.table() and stringsAsFactors=FALSE.
 
+1. Read subject_train.txt, X_train.txt and y_train.txt and merge it into merge_train. I have used a cbind() function to merge the three data files.
 
-The Inertial data is not merged since:
-1) Based on David's FAQ, the column names are not available, so I cannot classify them into mean or std
+subject_train + y_train + X_train ---(merge)--->> merge_train 
 
-the features file is then read and processed to get column names for the merged data
+2. Read subject_test.txt, X_test.txt and y_test.txt and merge it into merge_test
+I have used a cbind() function to merge the three data files.
 
+subject_test + y_test + X_test ---(merge)--->> merge_test 
 
-(2) Extracts only the measurements on the mean and standard deviation for each measurement. 
+3. Finally merge the two data tables from 1 & 2 into one : merged_data, using rbind().
 
-Using grep to acquire column names with "[Mm]ean" OR "std" 
-Then forming a data set with subject,activity code and the column names that were pulled from the grep step
+merge_train + merge_test ---(merge)--->> merged_data
 
-(3)Uses descriptive activity names to name the activities in the data set
-
-Now I rename the activity rows,by replacing the activity code with the actual activity to make the data more readable 
-
-(4) Appropriately labels the data set with descriptive variable names.
-
-Labeled the dataset variables
-
-(5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
+The intermediate files are removed using the rm() function.
 
 
+======================================================================
+PART 2 - Extracts only the measurements on the mean and standard 
+         deviation for each measurement
+======================================================================
 
+1. Read the features.txt to get the names of the 561 variables that were 
+measured.
+2. I have then cleaned up the variable list, and removed the special characters. The following "()","-","," were removed from the variable names.
+The feature list is a character vector of 561 variables. Since the x_train was combined with the y_train and subject_train data, it has two more variables. These variables contain the subject and activityCode variable. So the merged data has 563 columns. 
+3. To add the first two column names a new data frame is then prepared for the subject and activityCode. This is then merged with the feature list.
+4. This features list is then used as names for the columns in the merged data frame.
+5. Grep() function is then used to create a list of measurements which have '[Mm]ean' or 'std' in their column names. The "[Mm]" argument ensures that both "Mean" and "mean" are selected.
+6. This list (mean_std_cols) is then used to select only the mean and standard deviation from the merged data. This new data table is called as mean_std_data
+>>>Selecting only the mean and standard deviation data removes the columns with duplicate names. 
+>>>Also note that I have included the angular readings, in the mean_std_data. This angular data may be required when the data is analyzed. 
+gravityMean
+tBodyAccMean
+tBodyAccJerkMean
+tBodyGyroMean
+tBodyGyroJerkMean
 
+======================================================================
+PART 3 - Uses descriptive activity names to name the activities in the 
+         data set
+======================================================================
 
+1. In this I have read the activity names from the activity_labels.txt file.
+2. This data table is then used to replace the activity code with the activity description using the join() function from the plyr package. 
 
+>>>This is similar to the case study regarding Individual-level mortality rates in the "Tidy Data" paper by Hadley Wickham (see Pg.16), where the cod(cause of death) column the codes are replaced with the actual description for the cause of death. This makes the data more readable.
+
+3. The two tables are joined using the activityCode. So a new column is added with the description of the activity (ie. "Walking","Sitting"...etc)
+4. The activity column is the last column in the table and may not be visible when you view the data. So I have copied the values of this column over the activity codes column (which is the 2nd column in the table) After copying the data the last column is dropped. This is done to avoid keeping duplicate information in the data table.
+
+======================================================================
+PART 4 - Appropriately labels the data set with descriptive variable 
+         names
+======================================================================
+1. Then I use the sub() function to give more descriptive names to the variables
+2. The sub() function is used over the mean_std_cols list
+3. The above list is then used to rename the column names of the data file (mean_std_data) and stored as part4_data
+Intermediate data tables are removed using the rm() function
+
+======================================================================
+PART 5 - From the data set in step 4, creates a second, independent 
+         tidy data set with the average of each variable for each 
+         activity and each subject
+======================================================================
+1. I have used the group_by() and summarize functions from the dplyr package to prepare the final part of this project.The %>% operator is used in this step.
+2. The group_by function is used to first group the data table obtained from PART (4). This function groups the data by subject and activity.
+3. Then the summarise_each() function is used to calculate the means of each of the measurements. 
+4. This final data table is then written to a text file using write.table() function. The summarized data is stored in the "tidy_data.txt" file.
+
+======================================================================
+How to read the tidy data
+======================================================================
+
+Kindly use the following code to read the tidy data into your R environment
+
+summary_data<- read.table("tidy_data.txt",header=TRUE,stringsAsFactors=FALSE)
+
+The parameters header=TRUE is set since I have stored the variable name with the file to make it easier to read the data
+stringsAsFactors = FALSE is kept so that the data is coerced into their respective classes (either as a character or a numeric vector)
+This will make it easier to analyze the data 
 
