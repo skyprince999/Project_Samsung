@@ -26,7 +26,7 @@ The files in the repo are as follows:
 
 * codebook.r : *R script for preparing the codebook*
 
-* tidy_data.txt : *Final output!*
+* tidy_data.txt : *Final output! Stored with coursera*
 
 * Readme.md : *This file!* 
 
