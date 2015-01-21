@@ -34,12 +34,12 @@ The files in the repo are as follows:
 
 The data is read from the train and test folders and merged together. The files are read using read.table() and stringsAsFactors=FALSE.
 
-1. Read subject_train.txt, X_train.txt and y_train.txt and merge it into merge_train. I have used a cbind() function to merge the three data files.
+1. Read subject_train.txt, X_train.txt and y_train.txt and merge it into merge_train. cbind() function is used to merge the three data files.
 
 subject_train + y_train + X_train ---(merge)--->> merge_train 
 
 2. Read subject_test.txt, X_test.txt and y_test.txt and merge it into merge_test
-I have used a cbind() function to merge the three data files.
+cbind() function is used to merge the three data files.
 
 subject_test + y_test + X_test ---(merge)--->> merge_test 
 
