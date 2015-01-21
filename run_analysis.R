@@ -22,7 +22,7 @@ merge_train<-cbind( subject_train,y_train,x_train)
 merge_test<-cbind(subject_test,y_test,x_test)
 merged_data<-rbind(merge_train,merge_test)
 
-#rm(merge_train,merge_test,subject_train,subject_test,y_train,y_test,x_train,x_test)
+rm(merge_train,merge_test,subject_train,subject_test,y_train,y_test,x_train,x_test)
 
 ############################################################################
 ## Part 2 - Extracts only the measurements on the mean and standard 
@@ -78,7 +78,7 @@ mean_std_cols<-sub("gravity","Gravity",mean_std_cols)
 mean_std_cols<-sub("BodyBody","Body",mean_std_cols)
 names(part4_data)<- mean_std_cols 
 
-#rm(activity,new_rows,merged_data,features_names,mean_std_data,mean_std_cols)
+rm(activity,new_rows,merged_data,features_names,mean_std_data,mean_std_cols)
 
 ############################################################################
 ## Part 5 - From the data set in step 4, creates a second, independent 
@@ -92,4 +92,4 @@ tidy_data<- part4_data %>%
                 summarise_each(funs(mean))
 
 write.table(tidy_data,"tidy_data.txt",row.names=FALSE)
-#rm(part4_data)
+rm(part4_data)

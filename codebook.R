@@ -1,6 +1,15 @@
 library(dplyr)
-xyz<-data.frame(mean_std_cols)
-xyz$mean_std_cols<-as.character(xyz$mean_std_cols) 
-  
-xyz <- xyz %>% 
-        mutate(length_var=nchar(mean_std_cols))
+xyz<-data.frame(ColumnNames=mean_std_cols,Values =rep("[-1 to +1]",88))
+xyz$ColumnNames<-as.character(xyz$ColumnNames)
+xyz$Description<-xyz$ColumnNames
+xyz$Description<-gsub("X"," along the X-axis",xyz$Description)
+xyz$Description<-gsub("Y"," along the Y-axis",xyz$Description)
+xyz$Description<-gsub("Z"," along the Z-axis",xyz$Description)
+xyz$Description<-gsub("time","Time of ",xyz$Description)
+xyz$Description<-gsub("freq","Frequency of ",xyz$Description)
+xyz$Description<-gsub("Body"," Body ",xyz$Description)
+xyz$Description<-gsub("Gravity"," Gravity ",xyz$Description)
+xyz$Description<-gsub("Mean"," Mean",xyz$Description)
+xyz$Description<-gsub("Std"," Standard ",xyz$Description)
+
+write.table(xyz,"CodeBook.md",quote=FALSE,eol="\r\n")
