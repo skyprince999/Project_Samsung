@@ -24,6 +24,8 @@ The files in the repo are as follows:
 
 * CodeBook.md : *Provides description of the data fields in the tidy data*
 
+* codebook.r : *R script for preparing the codebook*
+
 * tidy_data.txt : *Final output!*
 
 * Readme.md : *This file!* 
