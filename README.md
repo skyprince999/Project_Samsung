@@ -37,19 +37,26 @@ The files in the repo are as follows:
 The data is read from the train and test folders and merged together. The files are read using read.table() and stringsAsFactors=FALSE.
 
 1. Read subject_train.txt, X_train.txt and y_train.txt and merge it into merge_train. cbind() function is used to merge the three data files.
-```
-subject_train + y_train + X_train ---(merge)--->> merge_train 
-```
-2. Read subject_test.txt, X_test.txt and y_test.txt and merge it into merge_test
-cbind() function is used to merge the three data files.
-```
-subject_test + y_test + X_test ---(merge)--->> merge_test 
-```
-3. Finally merge the two data tables from 1 & 2 into one : merged_data, using rbind().
-```
-merge_train + merge_test ---(merge)--->> merged_data
-```
+
+      ```
+      subject_train + y_train + X_train ---(merge)--->> merge_train 
+      ```
+
+
+2. Read subject_test.txt, X_test.txt and y_test.txt and merge it into merge_test cbind() function is used to merge the three data files.
+
+      ```
+      subject_test + y_test + X_test ---(merge)--->> merge_test 
+      ```
+
+3. Finally merge the two data tables from above into one : merged_data, using rbind().
+
+      ```
+      merge_train + merge_test ---(merge)--->> merged_data
+      ```
+
 The intermediate files are removed using the rm() function.
+
 
 
 ####PART 2 - Extracts only the measurements on the mean and standard deviation for each measurement
