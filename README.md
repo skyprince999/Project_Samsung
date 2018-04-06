@@ -37,7 +37,7 @@ The files in the repo are as follows:
 * Readme.md : *This file!* 
 
 
-####PART 1 - Merges the training and the test sets to create one data set
+# PART 1 - Merges the training and the test sets to create one data set
 
 
 The data is read from the train and test folders and merged together. The files are read using read.table() and stringsAsFactors=FALSE.
@@ -65,7 +65,7 @@ The intermediate files are removed using the rm() function.
 
 
 
-####PART 2 - Extracts only the measurements on the mean and standard deviation for each measurement
+# PART 2 - Extracts only the measurements on the mean and standard deviation for each measurement
          
 1. Read the features.txt to get the names of the 561 variables that were 
 measured.
@@ -83,7 +83,7 @@ tBodyAccJerkMean<br>
 tBodyGyroMean<br>
 tBodyGyroJerkMean<br>
 
-####PART 3 - Uses descriptive activity names to name the activities in the data set
+# PART 3 - Uses descriptive activity names to name the activities in the data set
          
 
 1. In this I have read the activity names from the activity_labels.txt file.
@@ -94,7 +94,7 @@ tBodyGyroJerkMean<br>
 3. The two tables are joined using the activityCode. So a new column is added with the description of the activity (ie. "Walking","Sitting"...etc)
 4. The activity column is the last column in the table and may not be visible when you view the data. So I have copied the values of this column over the activity codes column (which is the 2nd column in the table) After copying the data the last column is dropped. This is done to avoid keeping duplicate information in the data table.
 
-####PART 4 - Appropriately label the data set with descriptive variable names
+# PART 4 - Appropriately label the data set with descriptive variable names
          
 
 1. Then I use the sub() function to give more descriptive names to the variables
@@ -111,7 +111,7 @@ Intermediate data tables are removed using the rm() function
 4. This final data table is then written to a text file using write.table() function. The summarized data is stored in the "tidy_data.txt" file.
 
 
-####How to read the tidy data
+# How to read the tidy data
 
 Kindly use the following code to read the tidy data into your R environment
 
