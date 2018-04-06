@@ -1,10 +1,9 @@
-#####################################################################################################################
+# Note:
 
-The assumptions used in the project are based on the discussion in David's FAQ thread and a paper by the legendary:
+_The assumptions used in the project are based on the discussion in David's FAQ thread and a paper by the legendary:_
 
-"Tidy Data" paper by Hadley Wickhlam
+_"Tidy Data" paper by Hadley Wickhlam_
 
-#####################################################################################################################
 
 I have not processed the data inside the "Inertial Signals" folder since the information regarding the column names was not provided. 
 
