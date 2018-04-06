@@ -1,19 +1,26 @@
-######The assumptions for the project has been based on the discussion in David's FAQ thread and the "Tidy Data" paper by Hadley Wickhlam
+#####################################################################################################################
 
-######I have not processed the data inside the "Inertial Signals" folder since the information regarding the column names was not provided. 
+The assumptions used in the project are based on the discussion in David's FAQ thread and a paper by the legendary:
+
+"Tidy Data" paper by Hadley Wickhlam
+
+#####################################################################################################################
+
+I have not processed the data inside the "Inertial Signals" folder since the information regarding the column names was not provided. 
 
 I assume that the data files are stored as follows ::
 
-* UCI HAR Dataset
+## UCI HAR Dataset
+
        * activity_labels.txt :: *activity list with their codes*
        * features.txt :: *feature list of 561 variables*
        * features_info.txt
        * README.txt
-* UCI HAR Dataset/train
+## UCI HAR Dataset/train
        * subject_train.txt :: *identifies the subject*
        * X_train.txt :: *actual 561 vector measurement*
        * y_train.txt :: *identifies the activity*
-* UCI HAR Dataset/test :: *similar to the data in the train folder*
+## UCI HAR Dataset/test :: *similar to the data in the train folder*
        * subject_test.txt
        * X_test.txt
        * y_test.txt
